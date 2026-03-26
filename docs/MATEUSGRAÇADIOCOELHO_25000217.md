@@ -132,36 +132,248 @@ Liste os RNFs do sistema conforme seu MVP.
 - UC09 — Realizar venda a prazo
 - UC10 — Registrar conta a receber
 
+<img width="2116" height="585" alt="image" src="https://github.com/user-attachments/assets/e7ecea9a-fb5c-4007-a657-ea7328b67ae3" />
+
 ---
 
 # 6. Documentação dos Casos de Uso
 Para **cada caso de uso**, utilize o template abaixo:
 ---
 
-## **UCXX — Nome do Caso de Uso**
-**Ator(es):**  
-**Descrição:**  
-**Pré-condições:**  
-**Pós-condições:**  
+## **UC01 — Identificar cliente**
+**Ator(es): Atendente**  
+**Descrição: Permite localizar um cliente já cadastrado.**  
+**Pré-condições: Cliente pode ou não estar cadastrado.**  
+**Pós-condições: Cliente identificado no sistema.**  
 
 ### Fluxo Principal
-1.  
-2.  
-3.  
-4.  
+1.  Atendente informa o nome ou CPF do cliente
+2.  Sistema busca o cliente
+3.  Sistema exibe os dados do cliente
+4.  Atendente confirma o cliente
 
 ### Fluxos Alternativos / Exceções
-- FA01 —  
-- FA02 —  
+- FA01 — Cliente não encontrado → sugerir cadastro
+- FA02 — Dados inválidos → solicitar novamente
 
 ### Relacionamentos
-- **Include:** (listar quando aplicável)  
-- **Extend:** (listar quando aplicável)  
+- **Include: —** 
+- **Extend: Cadastrar cliente**
 
-### Inserir o diagrama de atividades do Caso de Uso, demonstrando tudo o fluxo princial e alternativos/exceções.
+<img width="242" height="312" alt="image" src="https://github.com/user-attachments/assets/1fca04c4-fafe-4d57-a138-edf324736579" />
 
 ---
 
-> Repita essa estrutura para **todos os seus casos de uso** (mínimo 10).
+## **UC02 — Cadastrar cliente**
+**Ator(es): Atendente**  
+**Descrição: Permite cadastrar um novo cliente.**  
+**Pré-condições: Cliente não cadastrado.**  
+**Pós-condições: Cliente registrado no sistema.**  
 
+### Fluxo Principal
+1.  Atendente informa dados do cliente
+2.  Sistema valida os dados
+3.  Sistema salva o cliente
+4.  Sistema confirma cadastro
 
+### Fluxos Alternativos / Exceções
+- FA01 — Dados inválidos → solicitar correção
+- FA02 — Cliente já existe → cancelar cadastro
+
+### Relacionamentos
+- **Include: —** 
+- **Extend: —**
+
+<img width="236" height="312" alt="image" src="https://github.com/user-attachments/assets/1375c80b-036e-46cd-8717-939e7da517e8" />
+
+---
+
+## **UC03 — Consultar produto**
+**Ator(es): Atendente**  
+**Descrição: Permite buscar produtos.**  
+**Pré-condições: Produto cadastrado.**  
+**Pós-condições: Produto exibido.**  
+
+### Fluxo Principal
+1.  Atendente informa nome ou código
+2.  Sistema busca produto
+3.  Sistema exibe resultado
+4.  Atendente seleciona produto
+
+### Fluxos Alternativos / Exceções
+- FA01 — Produto não encontrado
+- FA02 — Erro na busca
+
+### Relacionamentos
+- **Include: —** 
+- **Extend: —**
+
+<img width="244" height="257" alt="image" src="https://github.com/user-attachments/assets/09cfaef8-8f92-4f08-a947-a9b5b1742b7a" />
+
+---
+
+## **UC04 — Verificar estoque**
+**Ator(es): Atendente**  
+**Descrição: Mostra a quantidade disponível do produto.**  
+**Pré-condições: Produto selecionado.**  
+**Pós-condições: Estoque exibido.**  
+
+### Fluxo Principal
+1.  Sistema consulta estoque
+2.  Sistema mostra quantidade
+3.  Atendente verifica
+4.  Continua venda
+
+### Fluxos Alternativos / Exceções
+- FA01 — Produto sem estoque
+- FA02 — Erro no sistema
+
+### Relacionamentos
+- **Include: —** 
+- **Extend: —**
+
+<img width="249" height="257" alt="image" src="https://github.com/user-attachments/assets/dbc19841-9433-43d0-94b8-69312d2ee46b" />
+
+---
+
+## **UC05 — Registrar venda**
+**Ator(es): Atendente**  
+**Descrição: Inicia o processo de venda.**  
+**Pré-condições: Sistema ativo.**  
+**Pós-condições: Venda criada.**  
+
+### Fluxo Principal
+1.  Atendente inicia venda
+2.  Sistema abre venda
+3.  Atendente adiciona itens
+4.  Continua processo
+
+### Fluxos Alternativos / Exceções
+- FA01 — Erro ao iniciar
+- FA02 — Cancelamento
+
+### Relacionamentos
+- **Include: Adicionar item, Finalizar venda** 
+- **Extend: —**
+
+<img width="132" height="248" alt="image" src="https://github.com/user-attachments/assets/3b5b605b-a98a-4712-b3b7-1e49880413fe" />
+
+---
+
+## **UC06 — Adicionar item à venda**
+**Ator(es): Atendente**  
+**Descrição: Adiciona produtos à venda.**  
+**Pré-condições: Venda iniciada.**  
+**Pós-condições: Item adicionado.**  
+
+### Fluxo Principal
+1.  Buscar produto
+2.  Verificar estoque
+3.  Informar quantidade
+4.  Adicionar item
+
+### Fluxos Alternativos / Exceções
+- FA01 — Sem estoque
+- FA02 — Produto inválido
+
+### Relacionamentos
+- **Include: Consultar produto, Verificar estoque** 
+- **Extend: —**
+
+<img width="191" height="312" alt="image" src="https://github.com/user-attachments/assets/489c50ef-cef3-4762-9846-014c9b54c132" />
+
+---
+
+## **UC07 — Finalizar venda**
+**Ator(es): Atendente**  
+**Descrição: Finaliza a venda.**  
+**Pré-condições: Venda com itens.**  
+**Pós-condições: Venda concluída.**  
+
+### Fluxo Principal
+1.  Confirmar venda
+2.  Escolher pagamento
+3.  Finalizar
+4.  Atualizar estoque
+
+### Fluxos Alternativos / Exceções
+- FA01 — Cancelamento
+- FA02 — Erro pagamento
+
+### Relacionamentos
+- **Include: Emitir comprovante** 
+- **Extend: Venda a prazo**
+
+<img width="167" height="248" alt="image" src="https://github.com/user-attachments/assets/bd52c271-3c28-478a-a41a-03763da2293c" />
+
+---
+
+## **UC08 — Emitir comprovante**
+**Ator(es): Sistema**  
+**Descrição: Gera comprovante da venda.**  
+**Pré-condições: Venda finalizada.**  
+**Pós-condições: Comprovante emitido.**  
+
+### Fluxo Principal
+1.  Gerar dados
+2.  Criar comprovante
+3.  Exibir ou imprimir
+4.  Finalizar
+
+### Fluxos Alternativos / Exceções
+- FA01 — Erro na geração
+- FA02 — Impressora falha
+
+### Relacionamentos
+- **Include: —** 
+- **Extend: —**
+
+<img width="147" height="193" alt="image" src="https://github.com/user-attachments/assets/71ba67d8-8dc8-4f96-915d-85b9f2d9832a" />
+
+---
+
+## **UC09 — Realizar venda a prazo**
+**Ator(es): Atendente, Cliente**  
+**Descrição: Permite vender a prazo.**  
+**Pré-condições: Cliente identificado.**  
+**Pós-condições: Venda registrada a prazo.**  
+
+### Fluxo Principal
+1.  Selecionar pagamento a prazo
+2.  Definir vencimento
+3.  Confirmar
+4.  Finalizar venda
+
+### Fluxos Alternativos / Exceções
+- FA01 — Cliente não autorizado
+- FA02 — Dados inválidos
+
+### Relacionamentos
+- **Include: Registrar conta a receber** 
+- **Extend: Registrar venda**
+
+<img width="144" height="248" alt="image" src="https://github.com/user-attachments/assets/f344ccb6-73f7-4085-b7d6-ccf853b9dcc6" />
+
+---
+
+## **UC10 — Registrar conta a receber**
+**Ator(es): Sistema**  
+**Descrição: Registra valor a receber.**  
+**Pré-condições: Venda a prazo.**  
+**Pós-condições: Conta registrada.**  
+
+### Fluxo Principal
+1.  Gerar registro
+2.  Definir valor
+3.  Definir vencimento
+4.  Salvar
+
+### Fluxos Alternativos / Exceções
+- FA01 — Erro ao salvar
+- FA02 — Dados inválidos
+
+### Relacionamentos
+- **Include: —** 
+- **Extend: —**
+
+<img width="126" height="193" alt="image" src="https://github.com/user-attachments/assets/7fe8fcfc-ca52-42af-813f-8ae5dd0b5206" />
